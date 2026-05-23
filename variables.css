@@ -1,0 +1,50 @@
+/* ══════════════════════════════════════════════════════════
+   VARIABLES & RESET — SUNA / CULTE DU SOLEIL
+   Palette : sable brûlé, ocre profond, cramoisi de vent,
+             turquoise de mirage, noir de nuit désertique
+   ══════════════════════════════════════════════════════════ */
+:root {
+  /* Fonds */
+  --void:   #0c0800;      /* nuit désertique absolue */
+  --deep:   #150e04;      /* sable très sombre */
+  --shadow: #1e1408;      /* ombre de dune */
+  --mist:   #2d1f09;      /* ocre nuit */
+
+  /* Accents chauds — Suna */
+  --v1:     #c85a00;      /* cuivre brûlé */
+  --v2:     #e8980a;      /* ambre sable */
+  --cyan:   #d4a017;      /* or de désert */
+  --gold:   #f5d87a;      /* lumière de midi */
+
+  /* Spéciaux */
+  --rune:   #b84400;      /* rouge sable / sceau */
+  --sand:   #c8a050;      /* sable neutre */
+  --mirage: #5fb3a8;      /* turquoise mirage lointain */
+  --dust:   #8c6030;      /* poussière */
+
+  /* Texte */
+  --dim:    #6b4818;
+  --text:   #f0dba0;
+  --fade:   #a07040;
+
+  /* États */
+  --ok:     #e8980a;
+  --warn:   #c85a00;
+  --fail:   #cc2200;
+  --green:  #d4a017;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'Noto Serif JP', serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

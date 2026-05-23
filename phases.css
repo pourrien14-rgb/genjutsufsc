@@ -1,0 +1,293 @@
+/* ══════════════════════════════════════════════════════════
+   PHASE 1 — LA RUPTURE (timing mechanic) — SUNA THEME
+   ══════════════════════════════════════════════════════════ */
+.illusion-banner {
+  text-align:center; font-style:italic;
+  font-size:14px; line-height:2;
+  color:var(--fade); letter-spacing:1px;
+  padding: 18px 24px;
+  background: linear-gradient(135deg, rgba(200,90,0,.05), rgba(140,60,0,.08));
+  border: 1px solid rgba(200,90,0,.15);
+  border-radius:3px; margin-bottom:28px;
+  position:relative; overflow:hidden;
+}
+.illusion-banner::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,var(--v2),transparent);
+}
+.illusion-banner::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,var(--v1),transparent);
+}
+
+/* Timing track */
+.timing-section { margin-bottom:10px; }
+.timing-labels {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-bottom:8px;
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px;
+}
+.timing-label-left  { color:var(--v2); }
+.timing-label-right { color:var(--v2); }
+.timing-label-center { color:var(--dim); font-size:9px; letter-spacing:4px; }
+.timing-track-wrap { padding: 4px 0; }
+.timing-track {
+  position:relative; height:52px;
+  background: rgba(18,10,2,.95);
+  border: 1px solid rgba(200,90,0,.3);
+  border-radius:3px; overflow:hidden;
+  cursor:pointer;
+  /* Texture sable */
+  background-image: repeating-linear-gradient(
+    90deg, rgba(180,90,0,.02) 0px, rgba(180,90,0,.02) 2px, transparent 2px, transparent 20px
+  );
+}
+.timing-zone {
+  position:absolute; top:0; bottom:0;
+  background: linear-gradient(135deg,rgba(200,130,0,.22),rgba(180,160,0,.3));
+  border-left:2px solid var(--v2); border-right:2px solid var(--v2);
+  transition: left .05s, width .05s;
+}
+.timing-needle {
+  position:absolute; top:0; bottom:0; width: 3px;
+  background: linear-gradient(to bottom, transparent, #fff8d0, var(--gold), var(--v2), transparent);
+  box-shadow: 0 0 8px rgba(200,160,0,.9), 0 0 20px rgba(200,120,0,.5);
+  border-radius:2px;
+  transition: left 0s;
+  pointer-events:none;
+}
+.timing-zone-left-marker,
+.timing-zone-right-marker {
+  position:absolute; top:-4px; bottom:-4px; width:2px; pointer-events:none;
+}
+.timing-zone-left-marker  { background:var(--v2); box-shadow:0 0 6px var(--v2); }
+.timing-zone-right-marker { background:var(--v2); box-shadow:0 0 6px var(--v2); }
+.timing-meta {
+  display:flex; align-items:center; justify-content:space-between; margin-top:16px;
+}
+.timing-round { font-family:'Cinzel',serif; font-size:11px; color:var(--dim); letter-spacing:3px; min-width:70px; }
+
+.btn-strike {
+  padding: 14px 48px;
+  font-family:'Cinzel Decorative',serif; font-size:14px; letter-spacing:5px;
+  background: linear-gradient(135deg,rgba(200,90,0,.22),rgba(180,130,0,.18));
+  border: 2px solid var(--v1);
+  color: var(--gold);
+  cursor:pointer; border-radius:3px;
+  transition:all .15s;
+  text-shadow:0 0 10px rgba(200,160,0,.6);
+  box-shadow:0 0 20px rgba(200,90,0,.12);
+  user-select:none;
+}
+.btn-strike:hover {
+  background:linear-gradient(135deg,rgba(200,90,0,.38),rgba(180,130,0,.28));
+  box-shadow:0 0 30px rgba(180,100,0,.4);
+  border-color:var(--v2); transform:scale(1.03);
+}
+.btn-strike:active { transform:scale(.96); box-shadow:0 0 40px rgba(200,160,0,.6); }
+.btn-strike.success-flash { animation:strikeSuccess .4s ease; }
+.btn-strike.fail-flash    { animation:strikeFail    .4s ease; }
+@keyframes strikeSuccess {
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.08); box-shadow:0 0 50px rgba(200,180,0,.9); border-color:var(--gold); }
+}
+@keyframes strikeFail {
+  0%,100%{ transform:translateX(0); }
+  20%{ transform:translateX(-8px); } 60%{ transform:translateX(8px); }
+}
+.timing-track.in-zone { box-shadow:inset 0 0 20px rgba(200,160,0,.15); }
+
+/* ══════════════════════════════════════════════════════════
+   PHASE 2 — CRÉATION DE MONDE — SUNA THEME
+   ══════════════════════════════════════════════════════════ */
+.monde-layout {
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 20px; align-items: start;
+}
+.monde-panel-title {
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px;
+  color:var(--mirage); text-transform:uppercase;
+  margin-bottom:12px; padding-bottom:8px;
+  border-bottom:1px solid rgba(200,90,0,.18);
+}
+.monde-elem-grid {
+  display:grid; grid-template-columns: repeat(3,1fr);
+  gap:6px; max-height:380px; overflow-y:auto; padding-right:4px;
+}
+.monde-elem-grid::-webkit-scrollbar { width:3px; }
+.monde-elem-grid::-webkit-scrollbar-track { background:transparent; }
+.monde-elem-grid::-webkit-scrollbar-thumb { background:rgba(200,90,0,.35); border-radius:2px; }
+
+/* Éléments — style jutsu / parchemin */
+.elem-tag {
+  padding: 7px 5px; text-align:center;
+  border: 1px solid rgba(200,90,0,.2);
+  border-radius:2px; font-size:9.5px; letter-spacing:.4px;
+  cursor:pointer; transition:all .18s;
+  color:var(--dim); background:rgba(18,10,2,.55);
+  line-height:1.6; position:relative; overflow:hidden;
+}
+.elem-tag::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(200,120,0,.25),transparent);
+}
+.elem-tag:hover { border-color:var(--v2); color:var(--v2); background:rgba(200,90,0,.1); transform:translateY(-1px); }
+.elem-tag.used  { opacity:.25; cursor:default; pointer-events:none; border-style:dashed; }
+.elem-tag.selected-anim { animation:elemPop .25s ease; }
+@keyframes elemPop { 0%{transform:scale(1)} 50%{transform:scale(.88)} 100%{transform:scale(1)} }
+
+/* Catégorie labels pour les éléments Naruto */
+.elem-category {
+  font-family:'Cinzel',serif; font-size:8px; letter-spacing:3px;
+  color:var(--rune); text-transform:uppercase;
+  margin: 10px 0 4px; grid-column: span 3;
+  padding: 4px 0; border-bottom:1px solid rgba(200,90,0,.12);
+  opacity:.8;
+}
+
+.world-slots-list { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+.world-slot {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  padding:10px 12px; min-height:40px;
+  border:1px dashed rgba(200,90,0,.28); border-radius:2px;
+  font-size:11px; color:var(--dim); cursor:pointer;
+  transition:all .18s; text-align:center;
+}
+.world-slot:hover { border-color:var(--mirage); color:var(--mirage); background:rgba(100,200,180,.04); }
+.world-slot.filled { border-style:solid; border-color:var(--v1); color:var(--text); background:rgba(200,90,0,.08); }
+.world-slot.filled:hover { border-color:var(--fail); color:var(--fail); }
+
+.world-preview {
+  padding:14px; border:1px solid rgba(200,160,0,.14);
+  border-radius:3px; background:rgba(200,160,0,.03); margin-bottom:10px;
+}
+.world-preview-title {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:3px;
+  color:var(--fade); margin-bottom:8px;
+}
+.world-preview p { font-size:11px; color:var(--text); line-height:2; font-style:italic; }
+.coherence-wrap { margin-top:10px; }
+.coherence-bar { height:5px; background:var(--shadow); border-radius:3px; overflow:hidden; }
+.coherence-fill { height:100%; border-radius:3px; transition:width .35s, background .35s; width:0%; background:var(--fail); }
+.coherence-label { font-size:9px; color:var(--dim); text-align:right; margin-top:4px; letter-spacing:2px; }
+.monde-hint { font-size:10px; color:var(--dim); letter-spacing:1px; min-height:18px; margin-bottom:8px; font-style:italic; }
+
+/* ══════════════════════════════════════════════════════════
+   PHASE 3 — LES FAILLES — SUNA
+   ══════════════════════════════════════════════════════════ */
+.failles-meta {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:16px; padding:10px 16px;
+  background:rgba(18,10,2,.7); border:1px solid rgba(200,90,0,.15); border-radius:3px;
+}
+.failles-timer { font-family:'Cinzel',serif; font-size:26px; color:var(--v2); letter-spacing:4px; }
+.illusion-scene {
+  background:rgba(200,160,0,.03); border:1px solid rgba(200,160,0,.12);
+  border-radius:3px; padding:20px; margin-bottom:14px;
+}
+.scene-text { font-size:13px; line-height:2.2; color:var(--text); }
+.faille-word { cursor:pointer; border-bottom:2px dashed transparent; border-radius:2px; padding:1px 3px; transition:all .18s; }
+.faille-word:hover    { border-bottom-color:var(--v2); background:rgba(200,90,0,.14); }
+.faille-word.selected { background:rgba(200,90,0,.2); border-bottom-color:var(--v1); }
+.faille-word.correct  { background:rgba(200,160,0,.2); border-bottom-color:var(--green); color:var(--green); }
+.faille-word.wrong    { background:rgba(200,34,0,.12); border-bottom-color:var(--fail); color:var(--fail); }
+.failles-found { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; }
+.faille-badge { padding:4px 10px; border-radius:2px; font-size:10px; letter-spacing:1px; }
+.faille-badge.ok   { background:rgba(200,160,0,.15); color:var(--green); border:1px solid rgba(200,160,0,.3); }
+.faille-badge.miss { background:rgba(200,34,0,.1); color:var(--fail); border:1px solid rgba(200,34,0,.2); }
+.failles-counter { font-family:'Cinzel',serif; font-size:11px; color:var(--dim); letter-spacing:3px; text-align:center; margin-bottom:10px; }
+.failles-hint { font-size:10px; color:var(--dim); text-align:center; letter-spacing:1px; margin-bottom:10px; font-style:italic; }
+.validate-btn { width:100%; }
+
+/* ══════════════════════════════════════════════════════════
+   PHASE 4 — ABSORPTION — SUNA
+   ══════════════════════════════════════════════════════════ */
+.absorption-target {
+  border:1px solid rgba(200,160,0,.2); border-radius:3px;
+  padding:16px; background:rgba(200,160,0,.03); margin-bottom:12px;
+}
+.absorption-target-label {
+  font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px;
+  color:var(--mirage); margin-bottom:10px;
+}
+.target-slots { display:flex; gap:8px; flex-wrap:wrap; }
+.target-slot {
+  width:44px; height:44px; border:1px dashed rgba(200,160,0,.3);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:18px; transition:all .2s;
+}
+.target-slot.filled { border-style:solid; border-color:var(--mirage); background:rgba(100,180,160,.1); }
+.absorption-score { text-align:center; font-family:'Cinzel',serif; font-size:12px; letter-spacing:3px; color:var(--dim); margin-bottom:8px; }
+.absorption-lives { display:flex; gap:4px; justify-content:center; margin-bottom:12px; }
+.life-orbe { width:14px; height:14px; border-radius:50%; background:var(--rune); box-shadow:0 0 6px var(--rune); transition:all .2s; }
+.life-orbe.lost { background:var(--shadow); box-shadow:none; }
+.orbes-zone {
+  display:flex; justify-content:center; flex-wrap:wrap;
+  gap:14px; min-height:120px; align-items:center;
+  margin-bottom:14px; border:1px solid rgba(200,90,0,.18);
+  border-radius:3px; padding:18px; background:rgba(0,0,0,.3);
+}
+.orbe {
+  width:54px; height:54px; border-radius:50%; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; border:2px solid transparent;
+  transition:all .25s; animation:orbePulse 2s ease-in-out infinite;
+}
+@keyframes orbePulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.07)} }
+.orbe:hover { transform:scale(1.18) !important; filter:brightness(1.3); }
+.orbe.absorbed { opacity:0; transform:scale(0); pointer-events:none; transition:all .3s; }
+.orbe.wrong-flash { animation:wrongFlash .3s ease; }
+@keyframes wrongFlash { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2);filter:brightness(.5)} }
+
+/* ══════════════════════════════════════════════════════════
+   PHASE 5 — RÊVE PARTAGÉ — SUNA
+   ══════════════════════════════════════════════════════════ */
+.reve-stats {
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:11px; color:var(--dim); letter-spacing:2px; margin-bottom:12px;
+}
+.reve-timer { font-family:'Cinzel',serif; font-size:24px; color:var(--v2); letter-spacing:4px; }
+.reve-feedback { text-align:center; font-family:'Cinzel',serif; font-size:13px; letter-spacing:3px; min-height:20px; margin-bottom:10px; }
+.reve-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:14px; }
+.reve-card {
+  aspect-ratio:1; border:1px solid rgba(200,90,0,.25);
+  border-radius:3px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; transition:all .25s;
+  background:rgba(200,90,0,.03); position:relative; overflow:hidden;
+}
+.reve-card::before { content:''; position:absolute; inset:0; background:rgba(200,90,0,.12); opacity:0; transition:opacity .2s; }
+.reve-card:hover::before { opacity:1; }
+.reve-card.revealed   { border-color:var(--v1); background:rgba(200,90,0,.14); }
+.reve-card.matched    { border-color:var(--mirage); background:rgba(100,180,160,.1); pointer-events:none; box-shadow:0 0 12px rgba(100,180,160,.25); }
+.reve-card.wrong-pair { animation:wrongPair .4s ease; }
+.reve-card.hidden-face{ font-size:0; }
+@keyframes wrongPair { 0%,100%{transform:scale(1)} 50%{transform:scale(.92);border-color:var(--fail)} }
+
+/* ══════════════════════════════════════════════════════════
+   RÉSULTAT — SUNA
+   ══════════════════════════════════════════════════════════ */
+.result-sun {
+  text-align:center; font-size:44px; margin-bottom:8px;
+  animation:introRaysSpin 15s linear infinite; display:block;
+  filter:drop-shadow(0 0 20px rgba(200,160,0,.65));
+}
+@keyframes introRaysSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.result-symbol { text-align:center; font-size:50px; margin-bottom:10px; animation:pulseS 2s ease-in-out infinite; }
+@keyframes pulseS { 0%,100%{filter:drop-shadow(0 0 8px var(--v2))} 50%{filter:drop-shadow(0 0 22px var(--mirage))} }
+.result-quality { font-family:'Cinzel Decorative',serif; font-size:13px; letter-spacing:4px; text-align:center; margin-bottom:8px; text-transform:uppercase; }
+.result-divider { text-align:center; color:var(--dim); letter-spacing:4px; font-size:12px; margin:12px 0; }
+.result-name { font-family:'Cinzel',serif; font-size:15px; letter-spacing:3px; color:var(--text); text-align:center; margin-bottom:10px; }
+.result-flavor { font-size:11px; color:var(--fade); line-height:2.2; text-align:center; margin-bottom:18px; white-space:pre-line; }
+.scores-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin-bottom:18px; }
+.score-cell { background:rgba(200,90,0,.04); border:1px solid rgba(200,90,0,.18); border-radius:2px; padding:12px 5px; text-align:center; }
+.score-cell-label { font-size:8px; letter-spacing:2px; color:var(--dim); text-transform:uppercase; margin-bottom:5px; }
+.score-cell-value { font-family:'Cinzel',serif; font-size:16px; }
+.result-name-row { display:flex; gap:10px; justify-content:center; align-items:center; margin-bottom:14px; }
+#nameInput {
+  background:var(--shadow); border:1px solid rgba(200,90,0,.3);
+  border-radius:2px; padding:10px 12px; color:var(--text);
+  font-family:'Noto Serif JP',serif; outline:none; font-size:11px; letter-spacing:2px; width:180px;
+}
+#nameInput:focus { border-color:var(--v2); }
+.result-confirmed { font-family:'Cinzel',serif; font-size:14px; letter-spacing:4px; color:var(--mirage); min-height:22px; text-align:center; margin-bottom:14px; }

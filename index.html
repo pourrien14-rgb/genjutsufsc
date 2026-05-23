@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanctuaire du Genjutsu — Aku Satsu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@900&family=Noto+Serif+JP:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/phases.css">
+</head>
+<body>
+
+<!-- ══ INTRO OVERLAY ══ -->
+<div id="intro-overlay">
+  <div class="intro-sand-storm"></div>
+  <div class="intro-dunes">
+    <div class="intro-dune"></div>
+    <div class="intro-dune"></div>
+    <div class="intro-dune"></div>
+    <div class="intro-dune"></div>
+  </div>
+  <div class="intro-shafts" id="introShafts"></div>
+  <div class="intro-sun-wrap">
+    <div class="intro-halo-2"></div>
+    <div class="intro-halo"></div>
+    <div class="intro-rays">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(100,100)">
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(22.5)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(45)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(67.5)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(90)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(112.5)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(135)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(157.5)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(180)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(202.5)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(225)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(247.5)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(270)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(292.5)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(315)"/>
+          <line x1="0" y1="-96" x2="0" y2="-60" stroke="rgba(255,200,0,0.4)" stroke-width="1.5" transform="rotate(337.5)"/>
+          <circle r="58" fill="none" stroke="rgba(255,180,0,0.12)" stroke-width="8"/>
+        </g>
+      </svg>
+    </div>
+    <div class="intro-sun-circle"></div>
+    <div class="intro-glyph">☀</div>
+  </div>
+  <div class="intro-content">
+    <div class="intro-jp">幻術の聖域へようこそ</div>
+    <div class="intro-welcome">Bienvenue dans le</div>
+    <div class="intro-sanctuary">Sanctuaire du Genjutsu</div>
+    <div class="intro-author">d'Aku Satsu</div>
+    <div class="intro-sep">⊹ ───── ☀ ───── ⊹</div>
+  </div>
+</div>
+
+<!-- ══ BACKGROUND SUNA ══ -->
+<div class="bg-suna"></div>
+<div class="bg-stars" id="bgStars"></div>
+<div class="bg-dunes">
+  <div class="bg-dune-shape"></div>
+  <div class="bg-dune-shape"></div>
+  <div class="bg-dune-shape"></div>
+  <div class="bg-dune-shape"></div>
+  <div class="bg-dune-shape"></div>
+</div>
+<div class="suna-moon"></div>
+<div class="spirits-bg" id="spirits"></div>
+<div class="bg-glow"></div>
+
+<!-- ══ FIXED HEADER ══ -->
+<header id="site-header">
+  <div class="hdr-inner">
+    <div class="hdr-jp">幻術の道</div>
+    <h1 class="hdr-title">Sanctuaire du Genjutsu</h1>
+    <div class="hdr-sub">Cinq Épreuves · Aku Satsu</div>
+  </div>
+  <!-- Progress integrated in header -->
+  <div class="progress-bar" id="progressBar" style="display:none;">
+    <div class="prog-step" id="ps0"></div>
+    <div class="prog-step" id="ps1"></div>
+    <div class="prog-step" id="ps2"></div>
+    <div class="prog-step" id="ps3"></div>
+    <div class="prog-step" id="ps4"></div>
+  </div>
+</header>
+
+<!-- ══ MAIN ══ -->
+<main id="app">
+
+  <!-- ══ MENU ══ -->
+  <div id="phase-menu">
+    <div class="menu-title-block">
+      <div class="menu-sun-deco">☀</div>
+      <h2 class="menu-h2">Le Chemin du Genjutsu</h2>
+      <p class="menu-intro">Cinq épreuves de maîtrise vous attendent. Relevez-les toutes ou choisissez votre défi.</p>
+    </div>
+    <div class="phases-grid">
+      <div class="phase-card" onclick="startPhase(0)">
+        <div class="pc-num">I</div>
+        <div class="pc-icon">⚡</div>
+        <div class="pc-body">
+          <div class="pc-name">La Rupture</div>
+          <div class="pc-desc">Chronométrez votre frappe pour briser l'illusion ennemie</div>
+        </div>
+        <div class="pc-arrow">→</div>
+      </div>
+      <div class="phase-card" onclick="startPhase(1)">
+        <div class="pc-num">II</div>
+        <div class="pc-icon">🌍</div>
+        <div class="pc-body">
+          <div class="pc-name">Création de Monde</div>
+          <div class="pc-desc">Forgez une illusion cohérente à partir d'éléments épars</div>
+        </div>
+        <div class="pc-arrow">→</div>
+      </div>
+      <div class="phase-card" onclick="startPhase(2)">
+        <div class="pc-num">III</div>
+        <div class="pc-icon">🔍</div>
+        <div class="pc-body">
+          <div class="pc-name">Les Failles</div>
+          <div class="pc-desc">Débusquez les incohérences cachées dans les illusions ennemies</div>
+        </div>
+        <div class="pc-arrow">→</div>
+      </div>
+      <div class="phase-card" onclick="startPhase(3)">
+        <div class="pc-num">IV</div>
+        <div class="pc-icon">🌀</div>
+        <div class="pc-body">
+          <div class="pc-name">Absorption</div>
+          <div class="pc-desc">Captez les orbes d'énergie dans l'ordre exact</div>
+        </div>
+        <div class="pc-arrow">→</div>
+      </div>
+      <div class="phase-card phase-card-full" onclick="startPhase(4)">
+        <div class="pc-num">V</div>
+        <div class="pc-icon">🌙</div>
+        <div class="pc-body">
+          <div class="pc-name">Le Rêve Partagé</div>
+          <div class="pc-desc">Plongez dans l'inconscient collectif et retrouvez les paires d'âmes</div>
+        </div>
+        <div class="pc-arrow">→</div>
+      </div>
+    </div>
+    <div class="menu-cta">
+      <button class="btn-main" onclick="startAll()">☀ Toutes les Épreuves</button>
+    </div>
+  </div>
+
+  <!-- ══ PHASE 1 : RUPTURE ══ -->
+  <div id="phase-rupture">
+    <div class="phase-header">
+      <div class="ph-badge">Épreuve I / V</div>
+      <h2 class="ph-title">La Rupture</h2>
+      <p class="ph-sub">L'illusion vous emprisonne — chronométrez votre frappe dans la zone de rupture</p>
+    </div>
+
+    <div class="illusion-banner" id="illusionText">
+      Vous êtes dans un pré fleuri. Le soleil brille, les oiseaux chantent...
+    </div>
+
+    <div class="timing-section">
+      <div class="timing-labels">
+        <span class="timing-label-left" id="zoneMinLabel">—</span>
+        <span class="timing-label-center">ZONE DE RUPTURE</span>
+        <span class="timing-label-right" id="zoneMaxLabel">—</span>
+      </div>
+      <div class="timing-track-wrap">
+        <div class="timing-track" id="timingTrack">
+          <div class="timing-zone" id="timingZone"></div>
+          <div class="timing-needle" id="timingNeedle"></div>
+          <div class="timing-zone-left-marker" id="zoneLeftMarker"></div>
+          <div class="timing-zone-right-marker" id="zoneRightMarker"></div>
+        </div>
+      </div>
+      <div class="timing-meta">
+        <span class="timing-round" id="ruptTimer">15s</span>
+        <button class="btn-strike" id="strikeBtn" onclick="strikeNow()">⚡ FRAPPER</button>
+        <span class="timing-round" id="ruptRoundLabel">Round 1/5</span>
+      </div>
+    </div>
+
+    <div class="round-dots" id="ruptProgress"></div>
+    <div class="phase-feedback" id="ruptFeedback"></div>
+  </div>
+
+  <!-- ══ PHASE 2 : CRÉATION ══ -->
+  <div id="phase-monde">
+    <div class="phase-header">
+      <div class="ph-badge">Épreuve II / V</div>
+      <h2 class="ph-title">Création de Monde</h2>
+      <p class="ph-sub">Sélectionnez 4 éléments pour bâtir une illusion cohérente et puissante</p>
+    </div>
+
+    <div class="monde-layout">
+      <div class="monde-left">
+        <div class="monde-panel-title">🌿 Éléments disponibles</div>
+        <div class="monde-elem-grid" id="elemList"></div>
+      </div>
+      <div class="monde-right">
+        <div class="monde-panel-title">🖼 Votre monde — <span id="slotsFilled">0</span>/4</div>
+        <div id="worldSlots" class="world-slots-list"></div>
+        <div class="world-preview">
+          <div class="world-preview-title">◈ APERÇU DE L'ILLUSION</div>
+          <p id="worldPreviewText">Ajoutez des éléments pour composer votre monde...</p>
+          <div class="coherence-wrap">
+            <div class="coherence-bar"><div class="coherence-fill" id="coherenceFill"></div></div>
+            <div class="coherence-label">Cohérence : <span id="coherenceVal">—</span></div>
+          </div>
+        </div>
+        <div class="monde-hint" id="mondeHint"></div>
+        <div class="btn-center">
+          <button class="btn-main btn-main-sm" onclick="validerMonde()">Sceller l'Illusion →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PHASE 3 : FAILLES ══ -->
+  <div id="phase-failles">
+    <div class="phase-header">
+      <div class="ph-badge">Épreuve III / V</div>
+      <h2 class="ph-title">Les Failles</h2>
+      <p class="ph-sub">Trouvez les incohérences cachées dans cette illusion</p>
+    </div>
+    <div class="failles-meta">
+      <div class="failles-timer" id="faillesTimer">60</div>
+      <div style="font-size:11px;color:var(--dim);letter-spacing:2px;">Scène <span id="sceneNum">1</span>/3</div>
+      <div style="font-size:11px;color:var(--rune);letter-spacing:2px;" id="faillesFound">0 failles</div>
+    </div>
+    <div class="illusion-scene">
+      <div class="scene-text" id="sceneText"></div>
+    </div>
+    <div class="failles-hint" id="faillesHint">Cliquez sur les mots ou éléments suspects...</div>
+    <div class="failles-found" id="faillesBadges"></div>
+    <div class="failles-counter" id="faillesCounter">Failles trouvées : 0 / <span id="faillesMax">0</span></div>
+    <div class="btn-center"><button class="btn-main btn-main-sm validate-btn" onclick="validerFailles()">Valider cette scène →</button></div>
+  </div>
+
+  <!-- ══ PHASE 4 : ABSORPTION ══ -->
+  <div id="phase-absorption">
+    <div class="phase-header">
+      <div class="ph-badge">Épreuve IV / V</div>
+      <h2 class="ph-title">Absorption</h2>
+      <p class="ph-sub">Absorbez les orbes d'énergie dans l'ordre exact indiqué</p>
+    </div>
+    <div class="absorption-target">
+      <div class="absorption-target-label">ORDRE À REPRODUIRE</div>
+      <div class="target-slots" id="targetSlots"></div>
+    </div>
+    <div class="absorption-score" id="absScore">Séquence 1 / 8</div>
+    <div class="absorption-lives" id="absLives"></div>
+    <div class="orbes-zone" id="orbesZone"></div>
+    <div class="phase-feedback" id="absFeedback"></div>
+  </div>
+
+  <!-- ══ PHASE 5 : RÊVE ══ -->
+  <div id="phase-reve">
+    <div class="phase-header">
+      <div class="ph-badge">Épreuve V / V</div>
+      <h2 class="ph-title">Le Rêve Partagé</h2>
+      <p class="ph-sub">Retrouvez les paires d'âmes dans l'inconscient collectif</p>
+    </div>
+    <div class="reve-stats">
+      <span id="revePairs">Paires : 0 / 8</span>
+      <div class="reve-timer" id="reveTimer">90</div>
+      <span id="reveTentatives">Tentatives : 0</span>
+    </div>
+    <div class="reve-feedback" id="reveFeedback"></div>
+    <div class="reve-grid" id="reveGrid"></div>
+  </div>
+
+  <!-- ══ RÉSULTAT ══ -->
+  <div id="phase-result">
+    <div class="result-sun">☀</div>
+    <div class="result-symbol" id="resSymbol">⛩️</div>
+    <div class="result-quality" id="resQuality">MAÎTRISE ABSOLUE</div>
+    <div class="result-divider"><span>⊹ ── ☀ ── ⊹</span></div>
+    <div class="result-name" id="resName">— Grand Maître du Sanctuaire —</div>
+    <div class="result-flavor" id="resFlavor"></div>
+    <div class="scores-grid" id="scoresGrid"></div>
+    <div class="result-name-row" id="nameRow">
+      <input id="nameInput" type="text" placeholder="Votre nom de ninja..." maxlength="24">
+      <button class="btn-main btn-main-sm" onclick="confirmName()">Graver</button>
+    </div>
+    <div class="result-confirmed" id="nameConfirmed"></div>
+    <div class="btn-center">
+      <button class="btn-main" onclick="resetAll()">Recommencer</button>
+    </div>
+  </div>
+
+</main>
+
+<script src="js/core.js"></script>
+<script src="js/phase1-rupture.js"></script>
+<script src="js/phase2-monde.js"></script>
+<script src="js/phase3-failles.js"></script>
+<script src="js/phase4-absorption.js"></script>
+<script src="js/phase5-reve.js"></script>
+<script src="js/result.js"></script>
+<script>
+(function () {
+  // ── Intro shafts ──
+  const shafts = document.getElementById('introShafts');
+  [15,25,38,50,62,74,85].forEach((pos,i) => {
+    const s = document.createElement('div');
+    s.className = 'intro-shaft';
+    s.style.cssText = `left:${pos}%;transform:rotate(${(pos-50)*0.5}deg);animation-delay:${i*0.3}s`;
+    shafts.appendChild(s);
+  });
+
+  // ── Kanji flottants dans l'intro ──
+  const KANJI = ['砂', '風', '幻', '術', '影', '月', '忍', '魂', '砂漠', '月光', '幻術'];
+  for (let k = 0; k < 14; k++) {
+    const kj = document.createElement('div');
+    kj.className = 'intro-kanji-float';
+    kj.textContent = KANJI[Math.floor(Math.random() * KANJI.length)];
+    const xPos = 5 + Math.random() * 90;
+    const dur  = 6 + Math.random() * 10;
+    kj.style.cssText = `left:${xPos}%;animation-duration:${dur}s;animation-delay:${-Math.random()*dur}s;font-size:${10+Math.random()*18}px`;
+    document.getElementById('intro-overlay').appendChild(kj);
+  }
+
+  // ── Étoiles du ciel de Suna ──
+  const stars = document.getElementById('bgStars');
+  for (let i = 0; i < 80; i++) {
+    const st = document.createElement('div');
+    st.className = 'star-dot';
+    const sz = 0.8 + Math.random() * 2;
+    st.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*55}%;
+      width:${sz}px; height:${sz}px;
+      animation-duration:${2+Math.random()*4}s;
+      animation-delay:${-Math.random()*4}s;
+      opacity:${0.2+Math.random()*0.5};
+    `;
+    stars.appendChild(st);
+  }
+
+  // ── Particules de sable ──
+  const c = document.getElementById('spirits');
+  const sandCols = ['#c8a050', '#d4a017', '#a07030', '#e8b860', '#b88840', '#8c6030'];
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    s.className = 'spirit';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.animationDuration = (5 + Math.random() * 12) + 's';
+    s.style.animationDelay = (-Math.random() * 15) + 's';
+    s.style.setProperty('--drift', (Math.random() * 160 - 80) + 'px');
+    const w = 1 + Math.random() * 2.5;
+    const h = 1 + Math.random() * 1.5;
+    s.style.width  = w + 'px';
+    s.style.height = h + 'px';
+    s.style.borderRadius = Math.random() > 0.5 ? '50%' : '1px';
+    const col = sandCols[Math.floor(Math.random() * sandCols.length)];
+    s.style.background = col;
+    s.style.boxShadow  = `0 0 ${w*1.5}px ${col}`;
+    c.appendChild(s);
+  }
+
+  // ── Intro dismiss ──
+  const overlay = document.getElementById('intro-overlay');
+  const dismiss = () => {
+    overlay.classList.add('hidden');
+    setTimeout(() => { overlay.style.display = 'none'; }, 1300);
+  };
+  setTimeout(dismiss, 3800);
+  overlay.addEventListener('click', dismiss);
+})();
+</script>
+</body>
+</html>

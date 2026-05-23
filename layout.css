@@ -1,0 +1,390 @@
+/* ══════════════════════════════════════════════════════════
+   INTRO — SUNA / CULTE DU SOLEIL
+   ══════════════════════════════════════════════════════════ */
+#intro-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: #0a0600;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  overflow: hidden; pointer-events: all; cursor: pointer;
+}
+#intro-overlay.hidden { animation: introFadeOut 1.2s ease-in-out forwards; }
+@keyframes introFadeOut {
+  0%   { opacity:1; }
+  100% { opacity:0; pointer-events:none; }
+}
+
+/* ── Dunes du désert en bas de l'intro ── */
+.intro-dunes {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
+  pointer-events: none; overflow: hidden;
+}
+.intro-dune {
+  position: absolute; bottom: 0; border-radius: 50% 50% 0 0;
+  background: linear-gradient(to top, #2a1800, #1a0e04);
+  opacity: 0; animation: duneRise 1.8s ease forwards;
+}
+.intro-dune:nth-child(1) { left:-5%; width:50%; height:120px; animation-delay:.4s; }
+.intro-dune:nth-child(2) { left:20%; width:55%; height:90px;  animation-delay:.6s; background: linear-gradient(to top,#200e00,#150a02); }
+.intro-dune:nth-child(3) { right:-5%; width:50%; height:140px; animation-delay:.5s; }
+.intro-dune:nth-child(4) { left:35%; width:40%; height:70px;  animation-delay:.8s; background: linear-gradient(to top,#1a0a00,#100800); }
+@keyframes duneRise { 0%{opacity:0;transform:translateY(40px)} 100%{opacity:1;transform:translateY(0)} }
+
+.intro-sand-storm {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 100% 60% at 50% 120%, rgba(180,100,0,.18) 0%, transparent 70%);
+  animation: sandBreath 3s ease-in-out infinite;
+}
+@keyframes sandBreath { 0%,100%{opacity:.6} 50%{opacity:1} }
+
+.intro-sun-wrap {
+  position: relative; width: 160px; height: 160px; margin-bottom: 36px;
+  animation: introSunRise 1.4s cubic-bezier(.22,1,.36,1) forwards; opacity: 0;
+}
+@keyframes introSunRise {
+  0%   { opacity:0; transform:translateY(50px) scale(.5); }
+  100% { opacity:1; transform:translateY(0)    scale(1);  }
+}
+.intro-rays { position:absolute; inset:-30px; animation:introRaysSpin 18s linear infinite, introRaysAppear 1.4s .3s ease forwards; opacity:0; }
+@keyframes introRaysAppear { 0%{opacity:0} 100%{opacity:1} }
+@keyframes introRaysSpin   { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.intro-rays svg { width:100%; height:100%; }
+
+.intro-sun-circle {
+  position:absolute; inset:22px; border-radius:50%;
+  background: radial-gradient(circle,#ffe8a0 0%,#d4a017 35%,#c85a00 75%,#8b2500 100%);
+  box-shadow: 0 0 30px rgba(200,90,0,.9),0 0 80px rgba(180,60,0,.6),0 0 150px rgba(140,40,0,.35);
+  animation: introPulse 2.5s ease-in-out infinite;
+}
+@keyframes introPulse {
+  0%,100%{ box-shadow:0 0 30px rgba(200,90,0,.9),0 0 80px rgba(180,60,0,.6),0 0 150px rgba(140,40,0,.35); }
+  50%    { box-shadow:0 0 50px rgba(220,130,0,1),0 0 120px rgba(200,70,0,.7),0 0 220px rgba(160,40,0,.45); }
+}
+.intro-glyph {
+  position:absolute; inset:30px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:40px; z-index:2;
+  filter:drop-shadow(0 0 10px rgba(255,230,150,.9));
+}
+
+.intro-halo,.intro-halo-2 { position:absolute; border-radius:50%; border:1px solid; }
+.intro-halo   { inset:-10px; border-color:rgba(200,160,0,.4); animation:introHalo 2s ease-out 1s forwards; opacity:0; }
+.intro-halo-2 { inset:-28px; border-color:rgba(180,100,0,.25); animation:introHalo 2s ease-out 1.4s forwards; opacity:0; }
+@keyframes introHalo { 0%{opacity:0;transform:scale(.8)} 30%{opacity:1} 100%{opacity:.4;transform:scale(1)} }
+
+/* Haiku-kanji flottant */
+.intro-kanji-float {
+  position:absolute; font-family:'Noto Serif JP',serif;
+  font-size:16px; color:rgba(200,120,0,.2);
+  pointer-events:none; animation:kanjiDrift linear infinite;
+}
+@keyframes kanjiDrift {
+  0%  { transform:translateY(60px) rotate(-5deg); opacity:0; }
+  10% { opacity:1; }
+  90% { opacity:.15; }
+  100%{ transform:translateY(-120px) rotate(8deg); opacity:0; }
+}
+
+.intro-content { text-align:center; z-index:2; }
+.intro-jp      { font-family:'Noto Serif JP',serif; font-size:11px; letter-spacing:8px; color:rgba(200,140,0,.7); opacity:0; animation:introUp .8s cubic-bezier(.22,1,.36,1) .6s forwards; margin-bottom:8px; }
+.intro-welcome { font-family:'Cinzel',serif; font-size:13px; letter-spacing:6px; color:rgba(220,170,100,.85); opacity:0; animation:introUp .8s cubic-bezier(.22,1,.36,1) .9s forwards; text-transform:uppercase; margin-bottom:6px; }
+.intro-sanctuary { font-family:'Cinzel Decorative',serif; font-size:clamp(18px,4vw,30px); font-weight:900; letter-spacing:3px; background:linear-gradient(135deg,#f5e080 0%,#d4a017 40%,#c85a00 70%,#8b2500 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; opacity:0; animation:introUp 1s cubic-bezier(.22,1,.36,1) 1.2s forwards; text-transform:uppercase; margin-bottom:4px; }
+.intro-author  { font-family:'Cinzel Decorative',serif; font-size:clamp(24px,5vw,44px); font-weight:900; letter-spacing:6px; color:#d4a017; opacity:0; animation:introAuthor 1.2s cubic-bezier(.22,1,.36,1) 1.6s forwards; text-transform:uppercase; text-shadow:0 0 20px rgba(200,160,0,.9),0 0 60px rgba(180,80,0,.6); }
+@keyframes introAuthor { 0%{opacity:0;transform:scale(1.3);letter-spacing:20px} 100%{opacity:1;transform:scale(1);letter-spacing:6px} }
+.intro-sep { margin-top:20px; font-size:14px; letter-spacing:4px; color:rgba(180,120,0,.6); opacity:0; animation:introUp .8s ease 2.1s forwards; }
+@keyframes introUp { 0%{opacity:0;transform:translateY(16px)} 100%{opacity:1;transform:translateY(0)} }
+
+.intro-shafts { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.intro-shaft  { position:absolute; bottom:0; width:2px; height:100vh; background:linear-gradient(to top,transparent,rgba(180,100,0,.08),transparent); transform-origin:bottom center; animation:shaftPulse 4s ease-in-out infinite; }
+@keyframes shaftPulse { 0%,100%{opacity:.4} 50%{opacity:.9} }
+
+/* ══════════════════════════════════════════════════════════
+   GLOBAL LAYOUT + FOND SUNA
+   ══════════════════════════════════════════════════════════ */
+html, body { height:100%; }
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'Noto Serif JP', serif;
+  min-height:100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ── Fond de scène désertique permanent ── */
+.bg-suna {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  /* Ciel nocturne désertique vers sol de sable */
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(180,70,0,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 35% at 50% 110%, rgba(120,70,10,.45) 0%, transparent 65%),
+    linear-gradient(to bottom,
+      #0c0800 0%,
+      #120c04 40%,
+      #1a1006 65%,
+      #221408 80%,
+      #2a1a0a 100%
+    );
+}
+
+/* ── Dunes SVG de fond fixes ── */
+.bg-dunes {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  height: 280px; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.bg-dune-shape {
+  position: absolute; bottom: 0; border-radius: 50% 50% 0 0;
+  animation: duneSway ease-in-out infinite;
+}
+.bg-dune-shape:nth-child(1) {
+  left:-8%; width:48%; height:160px;
+  background: linear-gradient(to top, rgba(35,20,5,.95), rgba(22,13,3,.8));
+  animation-duration:12s; animation-delay:0s;
+}
+.bg-dune-shape:nth-child(2) {
+  left:18%; width:52%; height:110px;
+  background: linear-gradient(to top, rgba(28,16,4,.9), rgba(18,10,2,.7));
+  animation-duration:15s; animation-delay:-3s;
+}
+.bg-dune-shape:nth-child(3) {
+  right:-8%; width:50%; height:185px;
+  background: linear-gradient(to top, rgba(40,22,6,.95), rgba(25,14,3,.8));
+  animation-duration:18s; animation-delay:-6s;
+}
+.bg-dune-shape:nth-child(4) {
+  left:40%; width:35%; height:80px;
+  background: linear-gradient(to top, rgba(20,12,3,.85), rgba(13,8,2,.65));
+  animation-duration:20s; animation-delay:-9s;
+}
+.bg-dune-shape:nth-child(5) {
+  left:55%; width:30%; height:130px;
+  background: linear-gradient(to top, rgba(30,18,5,.9), rgba(20,12,3,.75));
+  animation-duration:14s; animation-delay:-4s;
+}
+@keyframes duneSway {
+  0%,100%{ transform:translateX(0) scaleX(1); }
+  50%    { transform:translateX(6px) scaleX(1.01); }
+}
+
+/* ── Étoiles / lune sur ciel de Suna ── */
+.bg-stars {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.star-dot {
+  position: absolute; border-radius: 50%;
+  background: rgba(240,200,120,.8);
+  animation: starTwinkle ease-in-out infinite;
+}
+@keyframes starTwinkle {
+  0%,100%{ opacity:.3; transform:scale(1); }
+  50%    { opacity:1; transform:scale(1.4); }
+}
+
+/* ── Tempête de sable (particules) ── */
+.spirits-bg { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.spirit { position:absolute; border-radius:1px; animation:sandDrift linear infinite; opacity:0; }
+@keyframes sandDrift {
+  0%  { transform:translateY(110vh) translateX(0) rotate(0deg); opacity:0; }
+  8%  { opacity:.9; }
+  92% { opacity:.2; }
+  100%{ transform:translateY(-20px) translateX(var(--drift)) rotate(360deg); opacity:0; }
+}
+
+/* ── Lueur ambiante soleil de sable ── */
+.bg-glow {
+  position: fixed; inset:0; pointer-events:none; z-index:0;
+  background: radial-gradient(ellipse 60% 35% at 50% 115%, rgba(160,80,0,.14) 0%, transparent 70%);
+}
+
+/* ── Lune de Suna ── */
+.suna-moon {
+  position: fixed; top: 28px; right: 44px; z-index: 0;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f5dfa0, #d4a017 50%, #8b5800 100%);
+  box-shadow: 0 0 22px rgba(200,150,0,.4), 0 0 60px rgba(160,100,0,.2);
+  animation: moonGlow 6s ease-in-out infinite;
+  pointer-events: none;
+}
+.suna-moon::after {
+  content:''; position:absolute; inset:4px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,240,180,.3), transparent 70%);
+}
+@keyframes moonGlow {
+  0%,100%{ box-shadow:0 0 22px rgba(200,150,0,.4),0 0 60px rgba(160,100,0,.2); }
+  50%    { box-shadow:0 0 35px rgba(220,170,0,.6),0 0 90px rgba(180,120,0,.3); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   FIXED HEADER — style sceau de Suna
+   ══════════════════════════════════════════════════════════ */
+#site-header {
+  position: sticky; top:0; z-index: 100;
+  background: rgba(12,8,0,.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(200,90,0,.22);
+  padding: 14px 24px 0;
+  text-align: center;
+  /* Motif géométrique de sable fin */
+  background-image:
+    repeating-linear-gradient(0deg, rgba(180,90,0,.03) 0px, rgba(180,90,0,.03) 1px, transparent 1px, transparent 24px),
+    repeating-linear-gradient(90deg, rgba(180,90,0,.03) 0px, rgba(180,90,0,.03) 1px, transparent 1px, transparent 24px);
+}
+.hdr-inner { margin-bottom: 6px; }
+.hdr-jp    { font-size:9px; letter-spacing:10px; color:var(--rune); opacity:.7; margin-bottom:3px; }
+.hdr-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(14px,3vw,22px);
+  font-weight:900; letter-spacing:3px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--sand) 35%, var(--v2) 65%, var(--mirage) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.hdr-sub { font-size:9px; color:var(--dim); letter-spacing:5px; margin-top:2px; }
+
+.progress-bar {
+  display:flex; gap:6px; justify-content:center;
+  padding: 8px 0 0;
+  border-top: 1px solid rgba(200,90,0,.12);
+  margin-top: 8px;
+}
+.prog-step { flex:1; height:3px; background:rgba(200,90,0,.15); border-radius:2px; max-width:100px; transition:background .4s; }
+.prog-step.done   { background: var(--mirage); }
+.prog-step.active { background: var(--v2); box-shadow: 0 0 8px var(--v2); }
+
+/* ══════════════════════════════════════════════════════════
+   MAIN APP AREA
+   ══════════════════════════════════════════════════════════ */
+#app {
+  position:relative; z-index:1;
+  max-width: 880px; margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   MENU — style parchemin de sable
+   ══════════════════════════════════════════════════════════ */
+#phase-menu { display:block; }
+.menu-title-block { text-align:center; margin-bottom:32px; }
+.menu-sun-deco {
+  font-size:40px; animation:introRaysSpin 20s linear infinite;
+  display:inline-block; margin-bottom:10px;
+  filter:drop-shadow(0 0 16px rgba(200,140,0,.6));
+}
+.menu-h2 {
+  font-family:'Cinzel Decorative',serif; font-size:clamp(16px,3vw,26px);
+  font-weight:900; letter-spacing:3px; color:var(--gold);
+  text-shadow:0 0 30px rgba(200,150,0,.4);
+}
+.menu-intro { font-size:12px; color:var(--dim); letter-spacing:2px; line-height:2.2; margin-top:10px; }
+
+.phases-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 28px;
+}
+.phase-card {
+  display:flex; align-items:center; gap:14px;
+  padding: 18px 16px;
+  background: rgba(18,10,2,.75);
+  border: 1px solid rgba(200,90,0,.22);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all .22s;
+  position: relative; overflow:hidden;
+  /* Texture de sable subtile */
+  background-image: radial-gradient(circle at 80% 20%, rgba(180,100,0,.06) 0%, transparent 50%);
+}
+.phase-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background: linear-gradient(90deg,transparent,var(--v2),transparent);
+  opacity:0; transition:opacity .2s;
+}
+.phase-card:hover::before { opacity:.8; }
+.phase-card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:60px;
+  background: linear-gradient(to top, rgba(30,16,4,.4), transparent);
+  pointer-events:none;
+}
+.phase-card:hover {
+  border-color: rgba(200,150,0,.5);
+  background: rgba(30,16,4,.95);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(180,80,0,.2), inset 0 0 30px rgba(180,80,0,.05);
+}
+.phase-card-full { grid-column: span 2; }
+.pc-num { font-family:'Cinzel',serif; font-size:11px; color:var(--dim); letter-spacing:2px; min-width:18px; }
+.pc-icon { font-size:28px; min-width:36px; text-align:center; }
+.pc-body { flex:1; }
+.pc-name { font-family:'Cinzel',serif; font-size:12px; letter-spacing:3px; color:var(--text); text-transform:uppercase; margin-bottom:4px; }
+.pc-desc { font-size:10px; color:var(--dim); letter-spacing:1px; line-height:1.7; }
+.pc-arrow { font-size:18px; color:rgba(200,150,0,.3); transition:all .2s; margin-left:auto; padding-left:8px; }
+.phase-card:hover .pc-arrow { color:var(--v2); transform:translateX(4px); }
+.menu-cta { display:flex; justify-content:center; }
+
+/* ══════════════════════════════════════════════════════════
+   SHARED PHASE COMPONENTS
+   ══════════════════════════════════════════════════════════ */
+#phase-rupture, #phase-monde, #phase-failles,
+#phase-absorption, #phase-reve, #phase-result { display:none; }
+
+.phase-header {
+  text-align:center; margin-bottom:28px; padding-bottom:20px;
+  border-bottom:1px solid rgba(200,90,0,.15);
+  /* Effet de sable soufflé sur la ligne */
+  position: relative;
+}
+.phase-header::after {
+  content:''; position:absolute; bottom:-1px; left:20%; right:20%; height:1px;
+  background:linear-gradient(90deg,transparent,var(--sand),transparent);
+  opacity:.4;
+}
+.ph-badge { font-size:9px; letter-spacing:6px; color:var(--rune); text-transform:uppercase; margin-bottom:8px; }
+.ph-title {
+  font-family:'Cinzel Decorative',serif; font-size:clamp(18px,4vw,30px); font-weight:900; letter-spacing:2px;
+  background:linear-gradient(135deg, var(--gold), var(--v2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:8px;
+}
+.ph-sub { font-size:11px; color:var(--dim); letter-spacing:2px; line-height:1.9; }
+
+/* Buttons — sceau style */
+.btn-main {
+  display:inline-flex; align-items:center; gap:8px;
+  padding: 12px 30px;
+  font-family:'Cinzel',serif; font-size:11px; letter-spacing:5px; text-transform:uppercase;
+  background: linear-gradient(135deg, rgba(200,90,0,.18), rgba(180,140,0,.12));
+  border: 1px solid var(--v1);
+  color: var(--v2); cursor:pointer;
+  border-radius: 2px; transition:all .22s;
+  position: relative; overflow:hidden;
+}
+.btn-main::before {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(135deg, transparent 40%, rgba(200,140,0,.08));
+  pointer-events:none;
+}
+.btn-main:hover {
+  background: linear-gradient(135deg,rgba(200,90,0,.32),rgba(180,140,0,.22));
+  border-color:var(--v2);
+  box-shadow:0 0 24px rgba(180,100,0,.35);
+  transform:translateY(-1px);
+}
+.btn-main-sm { padding:10px 20px; font-size:10px; }
+.btn-center { display:flex; justify-content:center; gap:10px; margin-top:16px; }
+
+/* Feedback */
+.phase-feedback {
+  text-align:center; font-family:'Cinzel',serif;
+  font-size:15px; letter-spacing:4px;
+  min-height:24px; margin-top:14px;
+  animation: fadeInUp .3s ease;
+}
+@keyframes fadeInUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* Round dots */
+.round-dots { display:flex; gap:10px; justify-content:center; margin:16px 0; }
+.rup-dot {
+  width:12px; height:12px; border-radius:50%;
+  background:var(--shadow); border:1px solid rgba(200,90,0,.3);
+  transition:all .25s;
+}
+.rup-dot.ok   { background:var(--green); box-shadow:0 0 10px var(--green); }
+.rup-dot.fail { background:var(--fail);  box-shadow:0 0 8px var(--fail); }
+.divider { width:60px; height:1px; background:linear-gradient(90deg,transparent,var(--v1),transparent); margin:16px auto; }
