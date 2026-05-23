@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanctuaire du Genjutsu</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Serif+JP:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/phases.css">
+</head>
+<body>
+
+<!-- Particles background -->
+<div class="spirits-bg" id="spirits"></div>
+
+<!-- App -->
+<div id="app">
+  <div class="header">
+    <div class="header-jp">幻術の道 — CINQ ÉPREUVES</div>
+    <h1>Sanctuaire du Genjutsu</h1>
+    <div class="header-sub">Maîtrisez l'art de l'illusion</div>
+  </div>
+
+  <div class="card">
+
+    <!-- Progress bar (hidden until game starts) -->
+    <div class="progress-bar" id="progressBar" style="display:none;">
+      <div class="prog-step" id="ps0"></div>
+      <div class="prog-step" id="ps1"></div>
+      <div class="prog-step" id="ps2"></div>
+      <div class="prog-step" id="ps3"></div>
+      <div class="prog-step" id="ps4"></div>
+    </div>
+
+    <!-- ════════ MENU ════════ -->
+    <div id="phase-menu">
+      <div class="phase-title"><h2>Le Chemin du Genjutsu</h2></div>
+      <p class="menu-intro">
+        Cinq épreuves vous attendent. Chacune teste un aspect<br>
+        différent de la maîtrise de l'illusion.
+      </p>
+      <div class="phases-preview">
+        <div class="preview-card" onclick="startPhase(0)">
+          <div class="preview-icon">⚡</div>
+          <div class="preview-text">
+            <div class="t">I — La Rupture</div>
+            <div class="s">Briser l'illusion de l'ennemi</div>
+          </div>
+          <div class="preview-play">▶</div>
+        </div>
+        <div class="preview-card" onclick="startPhase(1)">
+          <div class="preview-icon">🌍</div>
+          <div class="preview-text">
+            <div class="t">II — Création</div>
+            <div class="s">Forger votre propre monde</div>
+          </div>
+          <div class="preview-play">▶</div>
+        </div>
+        <div class="preview-card" onclick="startPhase(2)">
+          <div class="preview-icon">🔍</div>
+          <div class="preview-text">
+            <div class="t">III — Les Failles</div>
+            <div class="s">Trouver les incohérences</div>
+          </div>
+          <div class="preview-play">▶</div>
+        </div>
+        <div class="preview-card" onclick="startPhase(3)">
+          <div class="preview-icon">🌀</div>
+          <div class="preview-text">
+            <div class="t">IV — Absorption</div>
+            <div class="s">Capturer les énergies hostiles</div>
+          </div>
+          <div class="preview-play">▶</div>
+        </div>
+        <div class="preview-card full" onclick="startPhase(4)">
+          <div class="preview-icon">🌙</div>
+          <div class="preview-text">
+            <div class="t">V — Le Rêve Partagé</div>
+            <div class="s">Plonger dans l'inconscient collectif</div>
+          </div>
+          <div class="preview-play">▶</div>
+        </div>
+      </div>
+      <div class="btn-center">
+        <button class="btn btn-cyan" onclick="startAll()">Toutes les épreuves →</button>
+      </div>
+    </div>
+
+    <!-- ════════ PHASE 1 : RUPTURE ════════ -->
+    <div id="phase-rupture">
+      <div class="phase-num">Épreuve I / V</div>
+      <div class="phase-title">
+        <h2>La Rupture</h2>
+        <div class="subtitle">Un ennemi vous a plongé dans une illusion — rompez-la</div>
+      </div>
+      <div class="rupture-timer" id="ruptTimer">15</div>
+      <div class="illusion-scene rupture-zone">
+        <div class="zone-title">CE QUE VOUS VOYEZ</div>
+        <div class="illusion-text" id="illusionText">Vous êtes dans un pré fleuri. Le soleil brille, les oiseaux chantent...</div>
+      </div>
+      <p style="font-size:11px;color:var(--dim);text-align:center;margin-bottom:10px;letter-spacing:1px;">
+        Maintenez le bouton jusqu'à dépasser le seuil <span style="color:var(--cyan)">75%</span>
+      </p>
+      <div class="pressure-gauge">
+        <div class="pressure-label">
+          <span>Pression mentale</span>
+          <span id="pressureNum">0%</span>
+        </div>
+        <div class="pressure-track">
+          <div class="pressure-fill" id="pressureFill"></div>
+          <div class="pressure-threshold"></div>
+        </div>
+      </div>
+      <div class="rupture-feedback" id="ruptFeedback"></div>
+      <div class="rupture-progress" id="ruptProgress"></div>
+      <button class="hold-btn" id="holdBtn"
+        onmousedown="holdStart()" ontouchstart="holdStart()"
+        onmouseup="holdEnd()" onmouseleave="holdEnd()" ontouchend="holdEnd()">
+        ⚡ Concentrez votre volonté — MAINTENEZ
+      </button>
+    </div>
+
+    <!-- ════════ PHASE 2 : CRÉATION ════════ -->
+    <div id="phase-monde">
+      <div class="phase-num">Épreuve II / V</div>
+      <div class="phase-title">
+        <h2>Création de Monde</h2>
+        <div class="subtitle">Assemblez les éléments pour forger une illusion cohérente</div>
+      </div>
+      <div class="monde-workspace">
+        <div class="monde-panel">
+          <h3>🌿 Éléments disponibles</h3>
+          <div class="element-list" id="elemList"></div>
+        </div>
+        <div class="monde-panel">
+          <h3>🖼 Votre monde — <span id="slotsFilled">0</span>/4 éléments</h3>
+          <div id="worldSlots"></div>
+        </div>
+      </div>
+      <div class="world-preview">
+        <div class="world-preview-title">APERÇU DE L'ILLUSION</div>
+        <p id="worldPreviewText" style="color:var(--dim);font-style:italic;">
+          Ajoutez des éléments pour composer votre monde...
+        </p>
+        <div class="coherence-bar">
+          <div class="coherence-fill" id="coherenceFill" style="width:0%;background:var(--fail);"></div>
+        </div>
+        <div class="coherence-label">Cohérence : <span id="coherenceVal">0%</span></div>
+      </div>
+      <div style="font-size:10px;color:var(--dim);text-align:center;margin-bottom:10px;letter-spacing:1px;" id="mondeHint">
+        Attention : certaines combinaisons sont incohérentes...
+      </div>
+      <div class="btn-center">
+        <button class="btn btn-cyan" onclick="validerMonde()">Sceller l'Illusion</button>
+      </div>
+    </div>
+
+    <!-- ════════ PHASE 3 : FAILLES ════════ -->
+    <div id="phase-failles">
+      <div class="phase-num">Épreuve III / V</div>
+      <div class="phase-title">
+        <h2>Les Failles</h2>
+        <div class="subtitle">Trouvez les incohérences cachées dans cette illusion</div>
+      </div>
+      <div class="failles-timer" id="faillesTimer">60</div>
+      <div class="illusion-scene">
+        <div class="scene-title">
+          <span>SCÈNE D'ILLUSION <span id="sceneNum">1/3</span></span>
+          <span style="font-size:10px;color:var(--rune);" id="faillesFound">0 failles</span>
+        </div>
+        <div class="scene-text" id="sceneText"></div>
+      </div>
+      <div class="failles-hint" id="faillesHint">Cliquez sur les mots ou éléments suspects...</div>
+      <div class="failles-found" id="faillesBadges"></div>
+      <div class="failles-counter" id="faillesCounter">
+        Failles trouvées : 0 / <span id="faillesMax">0</span>
+      </div>
+      <div class="btn-center">
+        <button class="btn btn-cyan validate-btn" onclick="validerFailles()">Valider cette scène →</button>
+      </div>
+    </div>
+
+    <!-- ════════ PHASE 4 : ABSORPTION ════════ -->
+    <div id="phase-absorption">
+      <div class="phase-num">Épreuve IV / V</div>
+      <div class="phase-title">
+        <h2>Absorption</h2>
+        <div class="subtitle">Absorbez les orbes d'énergie dans le bon ordre</div>
+      </div>
+      <p class="absorption-desc">
+        Des énergies hostiles flottent. Absorbez-les dans l'ordre exact indiqué avant qu'elles ne vous submergent.
+      </p>
+      <div class="absorption-target">
+        <div class="label">ORDRE À REPRODUIRE</div>
+        <div class="target-slots" id="targetSlots"></div>
+      </div>
+      <div class="absorption-score" id="absScore">Séquence 1 / 8</div>
+      <div class="absorption-lives" id="absLives"></div>
+      <div class="orbes-zone" id="orbesZone"></div>
+      <div class="rupture-feedback" id="absFeedback"></div>
+    </div>
+
+    <!-- ════════ PHASE 5 : RÊVE PARTAGÉ ════════ -->
+    <div id="phase-reve">
+      <div class="phase-num">Épreuve V / V</div>
+      <div class="phase-title">
+        <h2>Le Rêve Partagé</h2>
+        <div class="subtitle">Retrouvez les paires d'âmes dans l'inconscient collectif</div>
+      </div>
+      <p class="reve-desc">
+        Les esprits se ressemblent mais se cachent. Mémorisez, associez,<br>
+        avant que le rêve ne s'efface.
+      </p>
+      <div class="reve-stats">
+        <span id="revePairs">Paires : 0 / 8</span>
+        <span id="reveTentatives">Tentatives : 0</span>
+      </div>
+      <div class="reve-timer" id="reveTimer">90</div>
+      <div class="reve-feedback" id="reveFeedback"></div>
+      <div class="reve-grid" id="reveGrid"></div>
+    </div>
+
+    <!-- ════════ RÉSULTAT ════════ -->
+    <div id="phase-result">
+      <div class="result-symbol" id="resSymbol">⛩️</div>
+      <div class="result-quality" id="resQuality">MAÎTRISE ABSOLUE</div>
+      <div class="divider"></div>
+      <div class="result-name" id="resName">— Grand Maître du Sanctuaire —</div>
+      <div class="result-flavor" id="resFlavor"></div>
+      <div class="scores-grid" id="scoresGrid"></div>
+      <div class="result-name-row" id="nameRow">
+        <input id="nameInput" type="text" placeholder="Votre nom de ninja..." maxlength="24">
+        <button class="btn btn-cyan" style="padding:9px 16px;font-size:10px;" onclick="confirmName()">Graver</button>
+      </div>
+      <div class="result-confirmed" id="nameConfirmed"></div>
+      <div class="btn-center">
+        <button class="btn btn-gold" onclick="resetAll()">Recommencer</button>
+      </div>
+    </div>
+
+  </div><!-- /.card -->
+</div><!-- /#app -->
+
+<!-- Scripts (order matters: core first, then phases, then result) -->
+<script src="js/core.js"></script>
+<script src="js/phase1-rupture.js"></script>
+<script src="js/phase2-monde.js"></script>
+<script src="js/phase3-failles.js"></script>
+<script src="js/phase4-absorption.js"></script>
+<script src="js/phase5-reve.js"></script>
+<script src="js/result.js"></script>
+
+</body>
+</html>

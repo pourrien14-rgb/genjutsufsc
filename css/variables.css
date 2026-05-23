@@ -1,0 +1,38 @@
+/* ══════════════════════════════════════════════════════════
+   VARIABLES & RESET
+   ══════════════════════════════════════════════════════════ */
+:root {
+  --void:   #06040f;
+  --deep:   #0d0a1e;
+  --shadow: #1a1430;
+  --mist:   #221840;
+  --v1:     #7b2fff;
+  --v2:     #b04fff;
+  --cyan:   #00e5ff;
+  --gold:   #ffd700;
+  --rune:   #ff6de0;
+  --dim:    #6a5a8e;
+  --text:   #e8d8ff;
+  --fade:   #8a7aaa;
+  --ok:     #00e5ff;
+  --warn:   #b04fff;
+  --fail:   #ff2255;
+  --green:  #00ff88;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'Noto Serif JP', serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
